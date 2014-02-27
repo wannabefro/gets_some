@@ -21,6 +21,8 @@ describe "gets_array" do
     expect(Kernel.gets_array).to eql(['1', '2', '3'])
     stub_input("apple, banana, orange")
     expect(Kernel.gets_array).to eql(%w(apple banana orange))
+    stub_input("Hello world, goodbye, I love dogecoin")
+    expect(Kernel.gets_array).to eql(["Hello world", "goodbye", "I love dogecoin"])
   end
   it "should convert a pipe seperated list to an array" do
     stub_input("1|2|3")
@@ -31,5 +33,42 @@ describe "gets_array" do
     expect(Kernel.gets_array).to eql(['1', '2', '3'])
     stub_input("hello world goodbye")
     expect(Kernel.gets_array).to eql(['hello', 'world', 'goodbye'])
+  end
+end
+
+describe "gets_float" do
+  it "should convert a decimal seperated number to a float" do
+    stub_input("1.1")
+    expect(Kernel.gets_float).to eql(1.1)
+    stub_input("1")
+    expect(Kernel.gets_float).to eql(1.0)
+  end
+  it "should raise an error if not a valid float" do
+    stub_input("2.3.2")
+    expect{Kernel.gets_float}.to raise_error
+    stub_input("abc")
+    expect{Kernel.gets_float}.to raise_error
+  end
+end
+
+describe "gets_math" do
+  it "should evaluate the math in the input" do
+    stub_input("1 + 1")
+    expect(Kernel.gets_math).to eql(2)
+  end
+  it "should not value invalid math" do
+    stub_input("puts 'hello'")
+    expect{Kernel.gets_math}.to raise_error
+  end
+end
+
+describe "gets_number" do
+  it "should return an integer if the input is an integer" do
+    stub_input("1")
+    expect(Kernel.gets_number).to eql(1)
+  end
+  it "should be a float if the input is a float" do
+    stub_input("1.1")
+    expect(Kernel.gets_number).to eql(1.1)
   end
 end
