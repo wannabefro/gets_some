@@ -8,14 +8,16 @@ describe "gets_integer" do
     expect(Kernel.gets_integer).to eql(2345)
   end
   it "should raise an error if not a valid integer" do
-    stub_input("abc\n")
-    # expect{Kernel.gets_integer}.to raise_error(RuntimeError)
+    stub_input("abc\n", '2')
     printed = capture_stdout do
       Kernel.gets_integer
     end
-    expect(printed).to eq('abc is not a valid integer. Try again')
-    stub_input("1bc\n")
-    expect{Kernel.gets_integer}.to raise_error(RuntimeError)
+    expect(printed).to eq("abc is not a valid integer. Try again\n")
+    stub_input("1bc\n", '2')
+    printed = capture_stdout do
+      Kernel.gets_integer
+    end
+    expect(printed).to eql("1bc is not a valid integer. Try again\n")
   end
 end
 
@@ -48,10 +50,16 @@ describe "gets_float" do
     expect(Kernel.gets_float).to eql(1.0)
   end
   it "should raise an error if not a valid float" do
-    stub_input("2.3.2")
-    expect{Kernel.gets_float}.to raise_error
-    stub_input("abc")
-    expect{Kernel.gets_float}.to raise_error
+    stub_input("1.3.2", '2.1')
+    printed = capture_stdout do
+      Kernel.gets_float
+    end
+    expect(printed).to eq("1.3.2 is not a valid float. Try again\n")
+    stub_input("abc", '2.1')
+    printed = capture_stdout do
+      Kernel.gets_float
+    end
+    expect(printed).to eq("abc is not a valid float. Try again\n")
   end
 end
 
@@ -74,5 +82,12 @@ describe "gets_number" do
   it "should be a float if the input is a float" do
     stub_input("1.1")
     expect(Kernel.gets_number).to eql(1.1)
+  end
+  it "should return an error if neither a float or an integer is given" do
+    stub_input("abc", "1")
+    printed = capture_stdout do
+      Kernel.gets_number
+    end
+    expect(printed).to eq("abc is not a valid number. Try again\n")
   end
 end

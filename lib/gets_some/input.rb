@@ -1,3 +1,5 @@
+require 'pry'
+
 module GetsSome
   INTEGER_REGEX = /^\d+$/ 
   FLOAT_REGEX = /^\d+(.\d+)?$/
@@ -7,8 +9,7 @@ module GetsSome
       if input =~ INTEGER_REGEX
         input.to_i
       else
-        print "#{input} is not a valid integer. Try again"
-        gets_integer
+        failure(__method__.to_s, input)
       end
     end
 
@@ -24,11 +25,11 @@ module GetsSome
     end
 
     def gets_float
-      input = gets
+      input = gets.chomp
       if input =~ FLOAT_REGEX
         input.to_f
       else
-        raise "#{input} is not a valid float"
+        failure(__method__.to_s, input)
       end
     end
 
@@ -39,7 +40,7 @@ module GetsSome
       elsif input =~ FLOAT_REGEX
         input.to_f
       else
-        raise "#{input} can't be converted to a number"
+        failure(__method__.to_s, input)
       end
     end
 
@@ -50,6 +51,11 @@ module GetsSome
       else
         raise "Can't do math on #{input}"
       end
+    end
+
+    def failure(method, input)
+      puts "#{input} is not a valid #{method.split('_').last}. Try again"
+      self.send(method)
     end
   end
 end

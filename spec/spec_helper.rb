@@ -5,8 +5,8 @@ Bundler.setup
 require 'gets_some'
 
 module Helpers
-  def stub_input(input)
-    Kernel.stub(:gets).and_return(input);
+  def stub_input(input, optional_input = nil)
+    Kernel.stub(:gets).and_return(input, optional_input)
   end
 
   def capture_stdout(&blk)
