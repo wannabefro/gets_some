@@ -1,7 +1,7 @@
 require "gets_some/input"
 
 module Kernel
-  include Input
+  include GetsSome::Input
 end
 
 class Object

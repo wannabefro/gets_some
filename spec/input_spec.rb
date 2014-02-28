@@ -9,7 +9,11 @@ describe "gets_integer" do
   end
   it "should raise an error if not a valid integer" do
     stub_input("abc\n")
-    expect{Kernel.gets_integer}.to raise_error(RuntimeError)
+    # expect{Kernel.gets_integer}.to raise_error(RuntimeError)
+    printed = capture_stdout do
+      Kernel.gets_integer
+    end
+    expect(printed).to eq('abc is not a valid integer. Try again')
     stub_input("1bc\n")
     expect{Kernel.gets_integer}.to raise_error(RuntimeError)
   end
