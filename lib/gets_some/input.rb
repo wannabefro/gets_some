@@ -1,9 +1,10 @@
 require 'pry'
 
 module GetsSome
-  INTEGER_REGEX = /^\d+$/ 
-  FLOAT_REGEX = /^\d+(.\d+)?$/
   module Input
+    INTEGER_REGEX = /^\d+$/
+    FLOAT_REGEX = /^\d+(.\d+)?$/
+
     def gets_integer
       input = gets.chomp
       if input =~ INTEGER_REGEX
@@ -53,9 +54,5 @@ module GetsSome
       end
     end
 
-    def failure(method, input)
-      puts "#{input} is not a valid #{method.split('_').last}. Try again"
-      self.send(method)
-    end
   end
 end
