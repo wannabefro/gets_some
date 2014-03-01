@@ -1,4 +1,4 @@
 module GetsSome
-  STRICT = true
+  LOOSE = true
   load 'gets_some/failure.rb'
 end

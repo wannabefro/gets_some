@@ -1,7 +1,7 @@
-require 'pry'
-
 module GetsSome
   module Input
+    include GetsSome::Failure
+
     INTEGER_REGEX = /^\d+$/
     FLOAT_REGEX = /^\d+(.\d+)?$/
 

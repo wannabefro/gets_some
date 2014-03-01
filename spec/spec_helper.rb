@@ -6,7 +6,7 @@ require 'gets_some'
 
 module Helpers
   def stub_input(input, optional_input = nil)
-    Kernel.stub(:gets).and_return(input, optional_input)
+    Kernel.stub(:gets).and_return(input, (optional_input ? optional_input : input))
   end
 
   def capture_stdout(&blk)

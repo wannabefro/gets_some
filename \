@@ -1,4 +1,4 @@
 module GetsSome
   STRICT = true
-  load 'gets_some/failure.rb'
+  load './failure.rb'
 end

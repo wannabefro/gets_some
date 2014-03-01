@@ -1,4 +1,3 @@
-# TODO alias the failure method based on whether using strict input or not
 require "gets_some/failure"
 require "gets_some/input"
 
