@@ -19,4 +19,11 @@ describe 'loose failure' do
       expect(Kernel.gets_integer).to eql(0)
     end
   end
+
+  context 'loose failure for float' do
+    it 'should convert the string to a float' do
+      stub_input('abc')
+      expect(Kernel.gets_float).to eql(0.0)
+    end
+  end
 end

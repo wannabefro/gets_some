@@ -1,4 +1,0 @@
-module GetsSome
-  STRICT = true
-  load './failure.rb'
-end

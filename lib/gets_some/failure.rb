@@ -15,7 +15,7 @@ module GetsSome
       when 'gets_float' then input.to_f
       when 'gets_number' then input.to_f
       else
-        strict_failure(method, input)
+        normal_failure(method, input)
       end
     end
 

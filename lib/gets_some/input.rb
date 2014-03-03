@@ -35,7 +35,7 @@ module GetsSome
     end
 
     def gets_number
-      input = gets
+      input = gets.chomp
       if input =~ INTEGER_REGEX
         input.to_i
       elsif input =~ FLOAT_REGEX
@@ -45,8 +45,13 @@ module GetsSome
       end
     end
 
+    def gets_multiple
+      input = gets.chomp
+      input.split(',')
+    end
+
     def gets_math
-      input = gets
+      input = gets.chomp
       if input =~ /^[\d\+\/\*%\s-]+$/
         eval(input)
       else

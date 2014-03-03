@@ -97,4 +97,13 @@ describe 'input' do
       expect(printed).to eq("abc is not a valid number. Try again\n")
     end
   end
+
+  describe "gets_multiple" do
+    it "should do multiple assignment" do
+      stub_input("1,2")
+      a, b = Kernel.gets_multiple
+      expect(a).to eql('1')
+      expect(b).to eql('2')
+    end
+  end
 end
